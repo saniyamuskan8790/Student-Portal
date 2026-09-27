@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Attendance Percentage
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <h2 class="mb-4">Attendance Percentage</h2>
+
+    <table class="table table-bordered table-striped">
+
+        <thead class="table-dark">
+
+            <tr>
+                <th>Student</th>
+                <th>Roll Number</th>
+                <th>Total Classes</th>
+                <th>Present</th>
+                <th>Absent</th>
+                <th>Attendance %</th>
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            {% for data in attendance_data %}
+
+            <tr>
+
+                <td>{{ data.student.name }}</td>
+
+                <td>{{ data.student.roll_number }}</td>
+
+                <td>{{ data.total }}</td>
+
+                <td>{{ data.present }}</td>
+
+                <td>{{ data.absent }}</td>
+
+                <td>
+                    {{ data.percentage }}%
+                </td>
+
+            </tr>
+
+            {% empty %}
+
+            <tr>
+                <td colspan="6" class="text-center">
+                    No Students Found
+                </td>
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+    <a href="/attendance/" class="btn btn-primary">
+        Mark Attendance
+    </a>
+
+    <a href="/dashboard/" class="btn btn-secondary">
+        Dashboard
+    </a>
+
+</div>
+
+{% endblock %}

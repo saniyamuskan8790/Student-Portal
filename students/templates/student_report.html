@@ -1,0 +1,212 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Student Report
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <div class="card shadow">
+
+        <div class="card-header bg-primary text-white">
+            <h2>Student Academic Report</h2>
+        </div>
+
+        <div class="card-body">
+
+            <!-- Student Details -->
+
+            <h4 class="mb-3">Student Details</h4>
+
+            <table class="table table-bordered">
+
+                <tr>
+                    <th>Name</th>
+                    <td>{{ student.name }}</td>
+                </tr>
+
+                <tr>
+                    <th>Roll Number</th>
+                    <td>{{ student.roll_number }}</td>
+                </tr>
+
+                <tr>
+                    <th>Email</th>
+                    <td>{{ student.email }}</td>
+                </tr>
+
+                <tr>
+                    <th>Phone</th>
+                    <td>{{ student.phone }}</td>
+                </tr>
+
+                <tr>
+                    <th>Course</th>
+                    <td>{{ student.course }}</td>
+                </tr>
+
+            </table>
+
+
+            <!-- Attendance -->
+
+            <h4 class="mt-4 mb-3">
+                Attendance
+            </h4>
+
+            <table class="table table-bordered">
+
+                <tr>
+                    <th>Total Classes</th>
+                    <td>{{ total_attendance }}</td>
+                </tr>
+
+                <tr>
+                    <th>Present</th>
+                    <td>{{ present_attendance }}</td>
+                </tr>
+
+                <tr>
+                    <th>Attendance Percentage</th>
+                    <td>
+                        <strong>
+                            {{ attendance_percentage }}%
+                        </strong>
+                    </td>
+                </tr>
+
+            </table>
+
+
+            <!-- Marks Summary -->
+
+            <h4 class="mt-4 mb-3">
+                Marks Summary
+            </h4>
+
+            <table class="table table-bordered">
+
+                <tr>
+                    <th>Total Marks Obtained</th>
+                    <td>
+                        {{ total_marks_obtained }}
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>Total Maximum Marks</th>
+                    <td>
+                        {{ total_max_marks }}
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>Overall Percentage</th>
+                    <td>
+                        <strong>
+                            {{ overall_percentage }}%
+                        </strong>
+                    </td>
+                </tr>
+
+            </table>
+
+
+            <!-- Subject-wise Marks -->
+
+            <h4 class="mt-4 mb-3">
+                Subject-wise Results
+            </h4>
+
+            <table class="table table-bordered table-striped">
+
+                <thead class="table-dark">
+
+                    <tr>
+                        <th>Subject</th>
+                        <th>Exam</th>
+                        <th>Marks Obtained</th>
+                        <th>Maximum Marks</th>
+                        <th>Percentage</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% for mark in marks %}
+
+                    <tr>
+
+                        <td>
+                            {{ mark.subject }}
+                        </td>
+
+                        <td>
+                            {{ mark.exam_name }}
+                        </td>
+
+                        <td>
+                            {{ mark.marks_obtained }}
+                        </td>
+
+                        <td>
+                            {{ mark.max_marks }}
+                        </td>
+
+                        <td>
+
+                            {% if mark.max_marks > 0 %}
+
+                                {% widthratio mark.marks_obtained mark.max_marks 100 %}%
+
+                            {% else %}
+
+                                0%
+
+                            {% endif %}
+
+                        </td>
+
+                    </tr>
+
+                    {% empty %}
+
+                    <tr>
+
+                        <td colspan="5" class="text-center">
+                            No Marks Records Found
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+
+            <!-- Buttons -->
+
+            <div class="mt-4">
+
+                <a href="/students/" class="btn btn-primary">
+                    Students
+                </a>
+
+                <a href="/dashboard/" class="btn btn-secondary">
+                    Dashboard
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

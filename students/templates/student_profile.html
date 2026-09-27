@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Student Profile
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <div class="card shadow">
+
+        <div class="card-header bg-primary text-white">
+            <h2>Student Profile</h2>
+        </div>
+
+        <div class="card-body text-center">
+
+            {% if student.photo %}
+
+                <img src="{{ student.photo.url }}"
+                     width="180"
+                     height="180"
+                     class="rounded-circle mb-4"
+                     style="object-fit: cover;">
+
+            {% else %}
+
+                <p class="text-muted">
+                    No Photo Available
+                </p>
+
+            {% endif %}
+
+            <div class="text-start">
+
+                <p>
+                    <strong>Name:</strong>
+                    {{ student.name }}
+                </p>
+
+                <p>
+                    <strong>Roll Number:</strong>
+                    {{ student.roll_number }}
+                </p>
+
+                <p>
+                    <strong>Email:</strong>
+                    {{ student.email }}
+                </p>
+
+                <p>
+                    <strong>Phone:</strong>
+                    {{ student.phone }}
+                </p>
+
+                <p>
+                    <strong>Course:</strong>
+                    {{ student.course }}
+                </p>
+
+            </div>
+
+            <a href="/students/" class="btn btn-primary">
+                Back to Students
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
